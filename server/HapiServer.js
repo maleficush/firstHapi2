@@ -5,7 +5,8 @@
 'use strict'
 
 //모듈 선언영역
-var Hapi = require('hapi');
+var Hapi = require('hapi'),
+    logConfig = require('./config/LogConfig');
 
 var HapiServer = function() {
 
@@ -24,7 +25,7 @@ var HapiServer = function() {
     //라우팅 및 기타 플러그인 옵션
     var plugins = [
         //로그 관련 플러그인 및 설정
-        {register: route('good'), options: logConfig}
+        {register: require('good'), options: logConfig}
     ];
 };
 
