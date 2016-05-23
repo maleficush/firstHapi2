@@ -25,23 +25,22 @@ var HapiServer = function() {
     //라우팅 및 기타 플러그인 옵션
     var plugins = [
         //로그 관련 플러그인 및 설정
-        {register: require('good'), options: logConfig}
+        {register: require('good'), options: logConfig},
+
+        //StaticServer 라우팅
+        {register: require('./routes/StaticServerRouts')}
     ];
+
+
+    server.start(function(){
+        console.log('Server running at : ', server.info.uri);
+    });
+
+    return this;
 };
 
+module.exports = new HapiServer();
 
 
 
 
-// Add the route
-server.route({
-    method: 'GET',
-    path:'/hello',
-    handler: function (request, reply) {
-        return reply('hello world');
-    }
-});
-
-server.start(function(){
-    console.log('Server running at : ', server.info.uri);
-});
