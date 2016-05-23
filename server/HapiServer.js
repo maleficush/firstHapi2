@@ -28,8 +28,16 @@ var HapiServer = function() {
         {register: require('good'), options: logConfig},
 
         //StaticServer 라우팅
-        {register: require('./routes/StaticServerRouts')}
+        {register: require('./routes/StaticServerRoutes')}
+
+        //Web REST API 라우팅
     ];
+
+    server.register(plugins, function(err){
+       if (err) {
+           console.log(err);
+       }
+    });
 
 
     server.start(function(){
