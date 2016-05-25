@@ -24,21 +24,25 @@ var HapiServer = function() {
 
     //라우팅 및 기타 플러그인 옵션
     var plugins = [
+        //static pages and content
+        {register: require('inert')},
+
         //로그 관련 플러그인 및 설정
         {register: require('good'), options: logConfig},
 
         //StaticServer 라우팅
-        {register: require('./routes/StaticServerRoutes')},
+        {register: require('./routes/StaticServerRoutes')}
 
         //Web REST API 라우팅
 
-        //static pages and content
-        {register: require('inert')}
+
     ];
 
     server.register(plugins, function(err){
        if (err) {
            console.log(err);
+       } else {
+           console.log('Plugin success');
        }
     });
 

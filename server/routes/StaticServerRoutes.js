@@ -1,7 +1,7 @@
 'use strict';
 
 exports.register = function(server, options, next){
-    server.route(
+    server.route([
         {
             method: 'GET',
             path:'/',
@@ -11,20 +11,32 @@ exports.register = function(server, options, next){
         },
         {
             method: 'GET',
-            path: '/public/img/{path*}',
-            handler: function(request, reply){
-                reply.file(process.cwd() + '/public/img/{path*}');
+            path: '/public/img/{param*}',
+            handler: {
+                directory: {
+                    path: 'public/img'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/public/js/{param*}',
+            handler: {
+                directory: {
+                    path: 'public/js'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/public/view/{param*}',
+            handler: {
+                directory: {
+                    path: 'public/view'
+                }
             }
         }
-        //{
-        //    method: 'GET',
-        //    path:'/hello',
-        //    handler: function (request, reply) {
-        //        console.log('/hello handler!!');
-        //        return reply('hello world');
-        //    }
-        //}
-    );
+    ]);
 
     next();
 };

@@ -16,3 +16,5 @@ var LogConfig = {
 
     ]
 };
+
+module.exports = LogConfig;
