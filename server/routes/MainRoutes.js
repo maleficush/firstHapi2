@@ -6,9 +6,9 @@ exports.register = function(server, options, next){
     server.route([
         {
             method: 'GET',
-            path:'/',
+            path:'/maintest',
             handler: function(request, reply){
-                reply.file(process.cwd() + '/public/index.html');
+                reply.file(process.cwd() + '/public/view/Main.html');
             }
         }
     ]);

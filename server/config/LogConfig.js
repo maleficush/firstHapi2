@@ -1,20 +1,37 @@
 'use strict';
 
 var LogConfig = {
-    opsInterval: 5000,
-    reporters: [
-        {
-            reporter: require('good-file'),
-            events: {ops: '*'},
-            config: {path: process.cwd() + '/logs', prefix: 'hapi-process', rotate: 'daily'}
-        },
-        {
-            reporter: require('good-file'),
-            events: {response: '*'},
-            config: {path: process.cwd() + '/logs', prefix:'hapi-request', rotate:'daily'}
-        }
+    ops: {
+        interval: 1000
+    },
 
-    ]
+    reporters: {
+        console: [{
+            module: 'good-squeeze',
+            name: 'Squeeze',
+            args: [{ log: '*', response: '*' }]
+        }, {
+            module: 'good-console'
+        }, 'stdout'],
+        file: [{
+            module: 'good-squeeze',
+            name: 'Squeeze',
+            args: [{ ops: '*' }]
+        }, {
+            module: 'good-squeeze',
+            name: 'SafeJson'
+        }, {
+            module: 'good-file',
+            args: ['./logs/awesome_log']
+        }],
+        http: [{
+            module: 'good-squeeze',
+            name: 'Squeeze',
+            args: [{ error: '*' }]
+        }]
+    }
+
+
 };
 
 module.exports = LogConfig;

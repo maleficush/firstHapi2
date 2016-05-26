@@ -1,3 +1,4 @@
 'use strict'
 
-module.exports = MainController;
+var MainService = require('../service/MainService');
+//module.exports = MainController;
