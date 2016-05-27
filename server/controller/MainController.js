@@ -6,7 +6,22 @@ var MainController = function(){};
 
 MainController.prototype.dbTest = function(request, reply){
     console.log('MainController : dbTest');
-    MainService.dbTest(request, reply);
+    var self = this;
+    var paramData = {};
+
+    MainService.dbTestProc(paramData, function( err, result ){
+        var responseData = {};
+        responseData['protocol'] = 'dbTest';
+        responseData['data'] = result;
+        responseData['time'] = ( new Date() ).getTime();
+
+        if( err ) {
+            reply(err).code(500);
+        } else {
+            reply(result);
+        }
+        console.log(JSON.stringify(result));
+    });
 };
 
 module.exports = MainController;

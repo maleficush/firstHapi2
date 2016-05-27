@@ -6,6 +6,7 @@
 
 //모듈 선언영역
 var Hapi = require('hapi'),
+    jwt = require('hapi-auth-jwt2'),
     logConfig = require('./config/LogConfig');
 
 var HapiServer = function() {

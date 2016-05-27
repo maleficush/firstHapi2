@@ -1,3 +1,5 @@
+'use strict'
+
 //공통 결과관련 모델
 var CommModel = function(){
   var result = {};
@@ -9,3 +11,5 @@ var CommModel = function(){
 
     return result;
 };
+
+module.exports = CommModel;
