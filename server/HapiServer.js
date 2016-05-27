@@ -7,6 +7,7 @@
 //모듈 선언영역
 var Hapi = require('hapi'),
     jwt = require('hapi-auth-jwt2'),
+    keyConfig = require('./config/KeyConfig'),
     logConfig = require('./config/LogConfig');
 
 var HapiServer = function() {
@@ -22,6 +23,17 @@ var HapiServer = function() {
 
     //플러그인 등록 영역
 
+    //JWT관련 플러그인 등록
+    server.register(jwt, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('jwt plugin success');
+        }
+        //인증 토큰관련 설정
+        server.auth.strategy('jwt', 'jwt', keyConfig.jwtOption);
+
+    });
 
     //라우팅 및 기타 플러그인 옵션
     var plugins = [
@@ -45,6 +57,7 @@ var HapiServer = function() {
        } else {
            console.log('Plugin success');
        }
+        server.auth.default('jwt');
     });
 
 

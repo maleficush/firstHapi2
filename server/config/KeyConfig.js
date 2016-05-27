@@ -1,7 +1,7 @@
 'use strict'
 var KeyConfig = {
     jwtOption : {
-        key: 'liveu',
+        key: 'NeverShareYourSecret',
         verifyOptions: { algorithms: [ 'HS256' ] },
         validateFunc: function (decoded, request, callback) {
             console.log(decoded);

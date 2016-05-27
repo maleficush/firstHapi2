@@ -11,6 +11,13 @@ exports.register = function(server, options, next){
         {
             method: 'GET',
             path:'/maintest',
+            config: {auth: 'jwt'},
+            handler: mainController.dbTest
+        },
+        {
+            method: 'GET',
+            path:'/maintest2',
+            config: {auth: false},
             handler: mainController.dbTest
         }
     ]);
