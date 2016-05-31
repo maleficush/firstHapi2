@@ -5,19 +5,17 @@ var EventEmitter = require('events').EventEmitter,//이벤트 emite 패턴 사�
     util = require('util'),
     jwt = require('jsonwebtoken'),//JsonWebToken 인증
     db = require('../middleware/db'),//db커넥션 풀, db접속
+    AuthModel = require('../model/AuthModel'),//인증 모델
     CommModel = require('../model/CommModel');//API 공통모델
 
 
 
 var MainService = function(){
   this.on('dbTestExcute', this.dbTestExcute);
+  this.on('identify', this.identify);
 };
 
-
-
 util.inherits(MainService, EventEmitter);
-
-
 
 MainService.prototype.dbTestProc = function( paramData, callback ){
     this.dbTestCallback = callback;
@@ -45,6 +43,18 @@ MainService.prototype.dbTestExcute = function( commModel ){
 
         console.log( result );
     });
+};
+
+MainService.prototype.identifyProc = function( paramData, callback ){
+    console.log('identifyProc : paramData : ' + JSON.stringify(paramData));
+    var self = this;
+};
+
+MainService.prototype.identify = function( authModel ){
+    var self = this;
+    var USER_ID = authModel.user.USER_ID;
+
+    var sql = "SELECT USER_ID FROM USER WHERE USER_ID = ?";
 
 };
 
