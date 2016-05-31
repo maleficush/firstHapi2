@@ -1,5 +1,9 @@
-.outer{
+.outer1{
+    display: block;
+}
 
+.outer2{
+    display: none;
 }
 
 .header{

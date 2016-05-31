@@ -30,6 +30,7 @@ exports.register = function(server, options, next){
         {
             method: 'GET',
             path: '/public/js/{param*}',
+            config: {auth: false},
             handler: {
                 directory: {
                     path: 'public/spa/js'
