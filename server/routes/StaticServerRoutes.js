@@ -5,8 +5,17 @@ exports.register = function(server, options, next){
         {
             method: 'GET',
             path:'/',
+            config: {auth: false},
             handler: function(request, reply){
                 reply.file(process.cwd() + '/public/index.html');
+            }
+        },
+        {
+            method: 'GET',
+            path:'/bootTemplate',
+            config: {auth: false},
+            handler: function(request, reply){
+                reply.file(process.cwd() + '/public/spa/view/Main.html');
             }
         },
         {
@@ -14,7 +23,7 @@ exports.register = function(server, options, next){
             path: '/public/img/{param*}',
             handler: {
                 directory: {
-                    path: 'public/img'
+                    path: 'public/spa/img'
                 }
             }
         },
@@ -23,7 +32,17 @@ exports.register = function(server, options, next){
             path: '/public/js/{param*}',
             handler: {
                 directory: {
-                    path: 'public/js'
+                    path: 'public/spa/js'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/public/css/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'public/spa/css'
                 }
             }
         },
@@ -32,7 +51,27 @@ exports.register = function(server, options, next){
             path: '/public/view/{param*}',
             handler: {
                 directory: {
-                    path: 'public/view'
+                    path: 'public/spa/view'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/b3/css/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components/bootstrap/dist/css'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/b3/js/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components/bootstrap/dist/js'
                 }
             }
         }
