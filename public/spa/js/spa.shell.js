@@ -40,7 +40,9 @@ spa.shell = ( function(){
     //----  public 메서드 시작  ----
     //public 메서드 /initModule/ 시작
     initModule = function( $container ){
-
+        stateMap.$container = $container;
+        $container.html( configMap.main_html + configMap.main_html2 + configMap.main_html3 );
+        setJqueryMap();
     };
     //public 메서드 /initModule/ 끝
     //----  public 메서드 끝  ----
