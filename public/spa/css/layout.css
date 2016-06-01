@@ -1,0 +1,17 @@
+.mainOuter{
+    clear: both;
+    display: block;
+}
+
+.lcol{
+    float: left;
+    width: 30%;
+    background-color: #00aa9a;
+}
+
+.rcol{
+    float: left;
+    width: 70%;
+    background-color: #ffff00;
+}
+

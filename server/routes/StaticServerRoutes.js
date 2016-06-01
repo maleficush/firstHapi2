@@ -75,6 +75,16 @@ exports.register = function(server, options, next){
                     path: 'bower_components/bootstrap/dist/js'
                 }
             }
+        },
+        {
+            method: 'GET',
+            path: '/ang/js/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components/angular'
+                }
+            }
         }
     ]);
 

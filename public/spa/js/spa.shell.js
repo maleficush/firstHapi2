@@ -3,10 +3,9 @@ spa.shell = ( function(){
     //----  모듈 스코프 변수  ----
     var
         configMap = {
-            main_html: '<div class = "outer1" id="first"><div class="header">header 1</div><div class="main">main 1</div><div class="footer">footer 1</div></div>',
-            main_html2: '<div class = "outer2" id="second"><div class="header">header 2</div><div class="main">main 2</div><div class="footer">footer 2</div></div>',
-            main_html3: '<div class = "outer2" id="second"><div class="header">header 3</div><div class="main">main 3</div><div class="footer">footer 3</div></div>'
+            main_html: String() + '<div class = "outer1" id="first"><div class="header">header 1</div><div class="main">main 1</div><div class="footer">footer 1</div></div>'
         },
+
         stateMap = { $container: null },
 
         jqueryMap = {},
@@ -48,4 +47,4 @@ spa.shell = ( function(){
     //----  public 메서드 끝  ----
 
     return { initModule: initModule };
-});
+}());
