@@ -7,7 +7,7 @@ exports.register = function(server, options, next){
             path:'/',
             config: {auth: false},
             handler: function(request, reply){
-                reply.file(process.cwd() + '/public/index.html');
+                reply.file( process.cwd() + '/public/index.html' );
             }
         },
         {
@@ -15,9 +15,10 @@ exports.register = function(server, options, next){
             path:'/bootTemplate',
             config: {auth: false},
             handler: function(request, reply){
-                reply.file(process.cwd() + '/public/spa/view/Main.html');
+                reply.file( process.cwd() + '/public/angularjs/app.html' );
             }
         },
+
         {
             method: 'GET',
             path: '/public/img/{param*}',
@@ -85,7 +86,38 @@ exports.register = function(server, options, next){
                     path: 'bower_components/angular'
                 }
             }
+        },
+        {
+            method: 'GET',
+            path: '/angular-resource/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components/angular-resource'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/angular-route/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components/angular-route'
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/public/angularjs/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'public/angularjs'
+                }
+            }
         }
+
     ]);
 
     next();

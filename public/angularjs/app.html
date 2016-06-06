@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--ng-app 디렉티브 : angular.module내에 정의한 기능을 HTML에서 사용할 수 있도록 하는 기능-->
+<html lang="en" ng-app="sportsStore">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/ang/js/angular.js"></script>
+    <script src="/angular-resource/angular-resource.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
+    <link href="/b3/css/bootstrap.css" rel="stylesheet" />
+    <link href="/b3/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script>
+        //모듈 정의 부분, 두번째 배열에는 의존하는 모듈을 적어주면 angular가 이듈 모듈의 위치를 찾아
+        //해당 모듈의 기능을 제공하게끔 지시한다. --> 의존성 선언 : resolving dependency
+        angular.module('sportsStore', [ "customFilters" ]);
+    </script>
+    <script src="/public/angularjs/controllers/sportsStore.js"></script>
+    <script src="/public/angularjs/filters/customFilters.js"></script>
+    <script src="/public/angularjs/controllers/productListControllers.js"></script>
+</head>
+<body ng-controller = 'sportsStoreCtrl'>
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
+    </div>
+
+    <div class = "alert alert-danger" ng-show = "data.error">
+        Error ({{ data.error.status }}). The product data was not loaded.
+        <a href="http:localhost:8421/bootTemplate" class="alert-link">Click here to try again</a>
+    </div>
+
+    <ng-include src = "'/public/angularjs/views/productList.html'"></ng-include>
+
+</body>
+</html>

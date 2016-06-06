@@ -47,4 +47,3 @@ MainController.prototype.identify = function( request, reply ){
 };
 
 module.exports = MainController;
-

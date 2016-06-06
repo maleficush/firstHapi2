@@ -27,21 +27,21 @@ MainService.prototype.dbTestProc = function( paramData, callback ){
 MainService.prototype.dbTestExcute = function( commModel ){
     console.log('MainService : dbTestExcute');
     var self = this;
-    var sql = 'select * from user';
+    var sql = 'select * from product';
 
     db.query(sql, null, function(err, result){
         if( err ){
             console.log('error db.query');
         }
 
-        if( result[0] ){
+        if( result ){
             commModel.success = true;
             commModel.code = 1;
-            commModel.message = result[0];
+            commModel.message = result;
             self.dbTestCallback(null, commModel);
         }
 
-        console.log( result );
+        //console.log( result );
     });
 };
 

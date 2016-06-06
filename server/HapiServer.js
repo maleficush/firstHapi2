@@ -28,7 +28,7 @@ var HapiServer = function() {
         if (err) {
             console.log(err);
         } else {
-            console.log('jwt plugin success');
+            console.log('jwt plugin success122');
         }
         //인증 토큰관련 설정
         server.auth.strategy('jwt', 'jwt', keyConfig.jwtOption);

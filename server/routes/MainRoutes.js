@@ -26,7 +26,7 @@ exports.register = function(server, options, next){
             path:'/login',
             config: {auth: false},
             handler: mainController.identify
-        },
+        }
     ]);
 
     next();
