@@ -13,15 +13,17 @@
     <script>
         //모듈 정의 부분, 두번째 배열에는 의존하는 모듈을 적어주면 angular가 이듈 모듈의 위치를 찾아
         //해당 모듈의 기능을 제공하게끔 지시한다. --> 의존성 선언 : resolving dependency
-        angular.module('sportsStore', [ "customFilters" ]);
+        angular.module('sportsStore', [ "customFilters", "cart" ]);
     </script>
     <script src="/public/angularjs/controllers/sportsStore.js"></script>
     <script src="/public/angularjs/filters/customFilters.js"></script>
     <script src="/public/angularjs/controllers/productListControllers.js"></script>
+    <script src="/public/angularjs/components/cart/cart.js"></script>
 </head>
 <body ng-controller = 'sportsStoreCtrl'>
     <div class="navbar navbar-inverse">
         <a class="navbar-brand" href="#">SPORTS STORE</a>
+        <cart-summary/>
     </div>
 
     <div class = "alert alert-danger" ng-show = "data.error">

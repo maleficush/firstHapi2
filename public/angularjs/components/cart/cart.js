@@ -49,7 +49,27 @@ angular.module( "cart", [])
            restrict: "E",
            templateUrl: "/public/angularjs/components/cart/cartSummary.html",
            controller: function( $scope ){
+               // 장바구니 내 객체 배열을 반환
                var cartData = cart.getProducts();
+
+               //전체 가격
+               $scope.total = function(){
+                   var total = 0;
+                   for( var i = 0, len = cartData.length ; i < len ; i++ ){
+                       total += ( cartData[i].price * cartData[i].count );
+                   }
+                   return total;
+               }
+
+               //
+               $scope.itemCount = function(){
+                   var total = 0;
+                   for( var i = 0, len = cartData.length ; i < len ; i++ ){
+                       total += cartData[i].count;
+                   }
+                   return total;
+               }
+
            }
        }
     });
