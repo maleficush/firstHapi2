@@ -20,6 +20,7 @@ angular.module('customFilters', [])
         }
     })
 
+
     // 표시되어야 할 시작 인덱스와 종료 인덱스만큼의 데이터를 리턴시키는 메소드
     .filter( 'range', function( $filter ){
         // page : 현재 선택된 페이지(영역의 시작 인덱스 판단)
@@ -39,6 +40,7 @@ angular.module('customFilters', [])
             }
         }
     })
+
 
     //페이지 갯수
     .filter( 'pageCount', function(){

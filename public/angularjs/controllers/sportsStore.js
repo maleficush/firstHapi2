@@ -25,7 +25,7 @@ angular.module( 'sportsStore' )
 
     $scope.data = {};
 
-    $http.get( dataUrl)
+    $http.get( dataUrl )
         .success( function( data ) {
            $scope.data.products = data.message;
         })
