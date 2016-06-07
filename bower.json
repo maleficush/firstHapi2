@@ -1,0 +1,21 @@
+{
+  "name": "firsthapi",
+  "description": "",
+  "main": "Server.js",
+  "authors": [
+    "maleficush <maleficush@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/maleficush/firstHapi2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
