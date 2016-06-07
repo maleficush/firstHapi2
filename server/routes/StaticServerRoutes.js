@@ -15,7 +15,7 @@ exports.register = function(server, options, next){
             path:'/bootTemplate',
             config: {auth: false},
             handler: function(request, reply){
-                reply.file( process.cwd() + '/public/angularjs/app.html' );
+                    reply.file( process.cwd() + '/public/angularjs/app.html' );
             }
         },
 
