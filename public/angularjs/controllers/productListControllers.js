@@ -42,7 +42,7 @@ angular.module( 'sportsStore' )
         }
 
         $scope.addProductToCart = function ( product ){
-            //console.log( product );
+            console.log( product );
 
             //cart 팩토리 서비스 주입
             //카트에 물품 추가 시 처리

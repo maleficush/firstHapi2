@@ -16,6 +16,7 @@ angular.module( "cart", [])
                         break;
                     }
                 }
+
                 if( !addedToExistingItem ){
                     cartData.push({
                         count: 1, id: id, price: price, name: name
@@ -42,6 +43,7 @@ angular.module( "cart", [])
 
         }
     })
+
 
 
     .directive( 'cartSummary', function( cart ){

@@ -33,6 +33,14 @@
                    templateUrl: "/public/angularjs/views/productList.html"
                 });
 
+                $routeProvider.when( "/complete", {
+                   templateUrl: "/public/angularjs/views/thankYou.html"
+                });
+
+                $routeProvider.when( "/placeorder",{
+                   templateUrl: "/public/angularjs/views/placeOrder.html"
+                });
+
                 $routeProvider.otherwise({
                    templateUrl: "/public/angularjs/views/productList.html"
                 });
@@ -41,6 +49,7 @@
     <script src="/public/angularjs/controllers/sportsStore.js"></script>
     <script src="/public/angularjs/filters/customFilters.js"></script>
     <script src="/public/angularjs/controllers/productListControllers.js"></script>
+    <script src="/public/angularjs/controllers/checkoutControllers.js"></script>
     <script src="/public/angularjs/components/cart/cart.js"></script>
     <script src="/public/angularjs/components/d3/d3module.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
