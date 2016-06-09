@@ -116,7 +116,18 @@ exports.register = function(server, options, next){
                     path: 'public/angularjs'
                 }
             }
+        },
+        {
+            method: 'GET',
+            path: '/bower_components/{param*}',
+            config: {auth: false},
+            handler: {
+                directory: {
+                    path: 'bower_components'
+                }
+            }
         }
+
 
     ]);
 

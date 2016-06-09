@@ -58,10 +58,11 @@ angular.module( "cart", [])
                    for( var i = 0, len = cartData.length ; i < len ; i++ ){
                        total += ( cartData[i].price * cartData[i].count );
                    }
+                   console.log('scope.total = function 총가격 : ' + total);
                    return total;
                }
 
-               //
+               //선택된 물품들의 총 갯수
                $scope.itemCount = function(){
                    var total = 0;
                    for( var i = 0, len = cartData.length ; i < len ; i++ ){

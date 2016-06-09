@@ -11,14 +11,40 @@
     <link href="/b3/css/bootstrap-theme.css" rel="stylesheet" />
 
     <script>
-        //모듈 정의 부분, 두번째 배열에는 의존하는 모듈을 적어주면 angular가 이듈 모듈의 위치를 찾아
-        //해당 모듈의 기능을 제공하게끔 지시한다. --> 의존성 선언 : resolving dependency
-        angular.module('sportsStore', [ "customFilters", "cart" ]);
+        // 모듈 정의 부분, 두번째 배열에는 의존하는 모듈을 적어주면 angular가 이듈 모듈의 위치를 찾아
+        // 해당 모듈의 기능을 제공하게끔 지시한다. --> 의존성 선언 : resolving dependency
+
+        // ngRoute 모듈은 sportsStore 모듈의 의존성으로 선언
+        angular.module( 'sportsStore', [ "customFilters", "cart", "ngRoute" ] )
+        // config 메서드는 함수를 인자로 받는데, 이 함수는 모듈이 로드되는 시점(아직 애플리케이션이 실행되기 전)에
+        // 호출 되므로 최초 설정 작업을 수행할 수 있도록 함
+        // config 메서드로 전달한 함수에서는 프로바이더에 대한 의존성을 선언한다.
+
+        /**서비스 선언 방법
+          1. factory이용하여 사용할 모듈의 컨트롤러의 인자로 넘겨 주입
+          2. config를 이용하여 프로바이더 객체를 주입
+        **/
+            .config( function ( $routeProvider ){
+                $routeProvider.when( "/checkout", {
+                    templateUrl: "/public/angularjs/views/checkoutSummary.html"
+                });
+
+                $routeProvider.when( "/products", {
+                   templateUrl: "/public/angularjs/views/productList.html"
+                });
+
+                $routeProvider.otherwise({
+                   templateUrl: "/public/angularjs/views/productList.html"
+                });
+            });
     </script>
     <script src="/public/angularjs/controllers/sportsStore.js"></script>
     <script src="/public/angularjs/filters/customFilters.js"></script>
     <script src="/public/angularjs/controllers/productListControllers.js"></script>
     <script src="/public/angularjs/components/cart/cart.js"></script>
+    <script src="/public/angularjs/components/d3/d3module.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
 </head>
 <body ng-controller = 'sportsStoreCtrl'>
     <div class="navbar navbar-inverse">
@@ -31,7 +57,11 @@
         <a href="http:localhost:8421/bootTemplate" class="alert-link">Click here to try again</a>
     </div>
 
-    <ng-include src = "'/public/angularjs/views/productList.html'"></ng-include>
+    <!--단순 페이지 인클루드 가 아니라 -->
+    <!--<ng-include src = "'/public/angularjs/views/productList.html'"></ng-include>-->
+
+    <!--ngRoute를 이용하여 uri에따라 뷰를 변경해 줌-->
+    <ng-view/>
 
 </body>
 </html>

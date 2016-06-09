@@ -13,7 +13,7 @@ MainController.prototype.dbTest = function( request, reply ){
     paramData['authData'] = request.auth.credentials;
     console.log('MainController : authData : ' + JSON.stringify(request.auth.credentials));
 
-    MainService.dbTestProc(paramData, function( err, result ){
+    MainService.dbTestProc( paramData, function( err, result ){
         var responseData = {};
         responseData['protocol'] = 'dbTest';
         responseData['data'] = result;
