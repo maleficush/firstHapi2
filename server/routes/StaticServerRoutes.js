@@ -12,10 +12,18 @@ exports.register = function(server, options, next){
         },
         {
             method: 'GET',
-            path:'/bootTemplate',
+            path:'/app',
             config: {auth: false},
             handler: function(request, reply){
                     reply.file( process.cwd() + '/public/angularjs/app.html' );
+            }
+        },
+        {
+            method: 'GET',
+            path:'/admin',
+            config: {auth: false},
+            handler: function(request, reply){
+                    reply.file( process.cwd() + '/public/angularjs/admin.html' );
             }
         },
 

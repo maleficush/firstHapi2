@@ -11,8 +11,11 @@ var EventEmitter = require('events').EventEmitter,//이벤트 emite 패턴 사�
 
 
 var MainService = function(){
-  this.on('dbTestExcute', this.dbTestExcute);
-  this.on('identify', this.identify);
+    this.on('dbTestExcute', this.dbTestExcute);
+    this.on('identify', this.identify);
+    this.on('ordersExcute', this.ordersExcute);
+    this.on('identifyExcute', this.identifyExcute);
+    this.on('getOrdersExcute', this.getOrdersExcute);
 };
 
 util.inherits(MainService, EventEmitter);
@@ -40,14 +43,124 @@ MainService.prototype.dbTestExcute = function( commModel ){
             commModel.message = result;
             self.dbTestCallback(null, commModel);
         }
-
-        //console.log( result );
     });
 };
 
-MainService.prototype.identifyProc = function( paramData, callback ){
-    console.log('identifyProc : paramData : ' + JSON.stringify(paramData));
+MainService.prototype.ordersProc = function ( paramData, callback ){
+    console.log('ordersProc');
+    console.log( paramData );
+    this.ordersCallback = callback;
+    var commModel = new CommModel();
+    commModel.data = paramData;
+    this.emit( 'ordersExcute', commModel );
+};
+
+MainService.prototype.ordersExcute = function( commModel ){
+    console.log('MainService : ordersExcute');
+    //console.log( commModel.data );
+
+    //var orderedProducts = commModel.data.formData.products;
+    //console.log(orderedProducts);
+    //delete commModel.data.formData.products;
+
+    delete commModel.data.formData.products;
+    commModel.data.formData.giftwrap = "test";
+    console.log( commModel.data.formData );
     var self = this;
+    var sql = 'INSERT INTO orders SET ? ';
+    //var sql = 'INSERT INTO orders (name, street, city, state, zip, country, giftwrap ) values (?, ?, ?, ?, ?, ?, ?) ';
+    db.query( sql, commModel.data.formData, function( err, result ){
+        if( err ){
+            console.log('[ordersExcute] error db.query');
+        } else {
+            console.log('[ordersExcute] db Transaction Success');
+        }
+
+        if( result ){
+            commModel.success = true;
+            commModel.code = 1;
+            commModel.message = result;
+            self.ordersCallback( null, commModel );
+        }
+    });
+};
+
+
+MainService.prototype.getOrdersProc = function ( paramData, callback ){
+    console.log('ordersProc');
+    console.log( paramData );
+    this.ordersCallback = callback;
+    var commModel = new CommModel();
+    commModel.data = paramData;
+    this.emit( 'getOrdersExcute', commModel );
+};
+
+MainService.prototype.getOrdersExcute = function( commModel ){
+    console.log('MainService : ordersExcute');
+    //console.log( commModel.data );
+
+    //var orderedProducts = commModel.data.formData.products;
+    //console.log(orderedProducts);
+    //delete commModel.data.formData.products;
+
+    var self = this;
+    var sql = 'SELECT * FROM orders ';
+    //var sql = 'INSERT INTO orders (name, street, city, state, zip, country, giftwrap ) values (?, ?, ?, ?, ?, ?, ?) ';
+    db.query( sql, null, function( err, result ){
+        if( err ){
+            console.log('[ordersExcute] error db.query');
+        } else {
+            console.log('[ordersExcute] db Transaction Success');
+        }
+
+        if( result ){
+            console.log( result );
+            commModel.success = true;
+            commModel.code = 1;
+            commModel.message = result;
+            self.ordersCallback( null, commModel );
+        }
+    });
+};
+
+
+
+
+MainService.prototype.identifyProc = function( paramData, callback ){
+    console.log('identifyProc : paramData : ' + JSON.stringify( paramData ) );
+    var self = this;
+    this.identifyCallback = callback;
+    var commModel = new CommModel();
+    commModel.data = paramData;
+    this.emit( 'identifyExcute', commModel );
+};
+
+
+MainService.prototype.identifyExcute = function( authModel ){
+    console.log('identifyExcute : paramData : ' + JSON.stringify( authModel.data ) );
+    var self = this;
+    var username = authModel.data.formData.username;
+    var password = authModel.data.formData.password;
+
+    console.log(username + ' / ' + password);
+
+    var sql = "SELECT username FROM users WHERE username = ? AND password = ? ";
+    db.query( sql, authModel.data.formData, function( err, result ){
+        if( err ){
+            console.log('[identifyExcute] error db.query');
+        } else {
+            console.log('[identifyExcute] db Transaction Success');
+        }
+
+        if( result ){
+            authModel.success = true;
+            authModel.code = 1;
+            authModel.message = result;
+            self.identifyCallback( null, authModel );
+            console.log( "[identifyExcute] Success : " + result );
+        }
+    });
+
 };
 
 MainService.prototype.identify = function( authModel ){

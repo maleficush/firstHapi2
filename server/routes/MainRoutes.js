@@ -20,13 +20,26 @@ exports.register = function(server, options, next){
             config: {auth: false},
             handler: mainController.dbTest
         },
+        {
+            method: 'GET',
+            path:'/orders',
+            config: {auth: false},
+            handler: mainController.getOrders
+        },
         //아직 로그인 전이기 때문에 auth는 false로 셋팅한다.
         {
             method: 'POST',
-            path:'/login',
+            path:'/users/login',
             config: {auth: false},
             handler: mainController.identify
+        },
+        {
+            method: 'POST',
+            path:'/orders',
+            config: {auth: false},
+            handler: mainController.orders
         }
+
     ]);
 
     next();

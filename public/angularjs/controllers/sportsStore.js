@@ -1,35 +1,44 @@
 'use strict'
 //최상위 컨트롤러 생성
 angular.module( 'sportsStore' )
-    .constant( 'dataUrl', 'http://localhost:8421/maintest2' )
-    .controller('sportsStoreCtrl', function( $scope, $http, dataUrl ){
-
-    //Dummy Data
-    //$scope.data = {
-    //    products: [
-    //        {name : 'Product #1', description: 'A product', category: 'Category #1', price: 100},
-    //        {name : 'Product #2', description: 'A product', category: 'Category #1', price: 110},
-    //        {name : 'Product #3', description: 'A product', category: 'Category #2', price: 210},
-    //        {name : 'Product #4', description: 'A product', category: 'Category #3', price: 202},
-    //        {name : 'Product #5', description: 'A product', category: 'Category #2', price: 203},
-    //        {name : 'Product #6', description: 'A product', category: 'Category #1', price: 204},
-    //        {name : 'Product #7', description: 'A product', category: 'Category #2', price: 205},
-    //        {name : 'Product #8', description: 'A product', category: 'Category #5', price: 205},
-    //        {name : 'Product #9', description: 'A product', category: 'Category #4', price: 205},
-    //        {name : 'Product #10', description: 'A product', category: 'Category #3', price: 205},
-    //        {name : 'Product #11', description: 'A product', category: 'Category #4', price: 205},
-    //        {name : 'Product #12', description: 'A product', category: 'Category #5', price: 205},
-    //        {name : 'Product #13', description: 'A product', category: 'Category #2', price: 205}
-    //    ]
-    //};
+    .constant( 'dataUrl', 'http://localhost:5500/products' )
+    .constant( 'orderUrl', 'http://localhost:8421/orders' )
+    .controller('sportsStoreCtrl', function( $scope, $http, $location, dataUrl,  orderUrl, cart ){
 
     $scope.data = {};
 
     $http.get( dataUrl )
         .success( function( data ) {
-           $scope.data.products = data.message;
+            console.log("success");
+           //$scope.data.products = data.message;
+            $scope.data.products = data;
         })
         .error( function( error ) {
+            console.log("error");
            $scope.data.error = error;
         });
+
+    $scope.sendOrder = function( shippingDetails ){
+        // 배송 정보 객체를 안전하게 조작하기 위하여 angular.copy로 배송 정보 객체를 복사해서 사용한다.
+        var order = angular.copy( shippingDetails );
+        console.log('$scope.sendOrder');
+        console.log( order );
+
+        // 배송 정보 객체에 상품 json array를 추가한다.
+        order.products = cart.getProducts();
+        console.log( order.products );
+        $http.post( orderUrl, order )
+            .success( function( data ){
+                console.log( 'success callback ' );
+                console.log( data.data.data );
+                $scope.data = data.data.formData;
+                cart.getProducts().length = 0;
+            })
+            .error( function( error ){
+                $scope.data.orderError = error;
+            })
+            .finally( function(){
+                $location.path( "/complete" );
+            });
+    }
 });

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/maleficush/firstHapi2#readme",
   "dependencies": {
+    "dpd": "0.0.5",
     "event-emitter": "^0.3.4",
     "good": "^7.0.1",
     "good-console": "^6.1.1",

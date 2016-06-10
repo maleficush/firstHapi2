@@ -1,1 +1,33 @@
-<h2>thankYou.html</h2>
+<div class="alert alert-danger" ng-show = "data.orderError">
+    Error {{data.orderError.status}}. Ther order could not be placed.
+    <a href="#/placeorder" class="alert-link">Click here to try again</a>
+</div>
+
+<div class="well" ng-hide = "data.orderError">
+    <h2>Thanks!</h2>
+    Thanks for placing your order. We'll ship your goods as soon as possible.
+    If you need to contact us, use reference.
+
+    Next is your Ordered Summary.
+   <!-- <table class="table">
+        <thead>
+            <th>name</th>
+            <th>street</th>
+            <th>city</th>
+            <th>state</th>
+            <th>zip</th>
+            <th>country</th>
+            <th>giftwrap</th>
+        </thead>
+
+        <tbody>
+            <tr>{{data.name}}</tr>
+            <tr>{{data.street}}</tr>
+            <tr>{{data.city}}</tr>
+            <tr>{{data.state}}</tr>
+            <tr>{{data.zip}}</tr>
+            <tr>{{data.country}}</tr>
+            <tr>{{data.giftwrap}}</tr>
+        </tbody>
+    </table>-->
+</div>
