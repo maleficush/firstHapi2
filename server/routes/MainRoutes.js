@@ -26,6 +26,12 @@ exports.register = function(server, options, next){
             path:'/login',
             config: {auth: false},
             handler: mainController.identify
+        },
+        {
+            method: 'POST',
+            path:'/orders',
+            config: {auth: false},
+            handler: mainController.orders
         }
     ]);
 

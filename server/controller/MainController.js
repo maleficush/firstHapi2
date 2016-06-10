@@ -46,4 +46,27 @@ MainController.prototype.identify = function( request, reply ){
     });
 };
 
+//POST
+MainController.prototype.orders = function( request, reply ){
+    var self = this;
+    var paramData = {};
+    paramData['formData'] = request.payload;
+    console.log('MainController(orders) : formData : ' + JSON.stringify(request.payload));
+    MainService.ordersProc(paramData, function(err, result){
+        var responseData = {};
+        responseData['protocol'] = 'ordersRegist';
+        responseData['data'] = result;
+        console.log( '[MainController] success callback' );
+        console.log( result )
+        responseData['time'] = (new Date()).getTime();
+
+        if( err ) reply( err ).code( 500 );
+        else reply( responseData );
+
+
+    });
+};
+
+
+
 module.exports = MainController;

@@ -11,8 +11,9 @@ var EventEmitter = require('events').EventEmitter,//이벤트 emite 패턴 사�
 
 
 var MainService = function(){
-  this.on('dbTestExcute', this.dbTestExcute);
-  this.on('identify', this.identify);
+    this.on('dbTestExcute', this.dbTestExcute);
+    this.on('identify', this.identify);
+    this.on('ordersExcute', this.ordersExcute);
 };
 
 util.inherits(MainService, EventEmitter);
@@ -40,10 +41,51 @@ MainService.prototype.dbTestExcute = function( commModel ){
             commModel.message = result;
             self.dbTestCallback(null, commModel);
         }
-
-        //console.log( result );
     });
 };
+
+MainService.prototype.ordersProc = function ( paramData, callback ){
+    console.log('ordersProc');
+    console.log( paramData );
+    this.ordersCallback = callback;
+    var commModel = new CommModel();
+    commModel.data = paramData;
+    this.emit( 'ordersExcute', commModel );
+};
+
+MainService.prototype.ordersExcute = function( commModel ){
+    console.log('MainService : ordersExcute');
+    //console.log( commModel.data );
+
+    //var orderedProducts = commModel.data.formData.products;
+    //console.log(orderedProducts);
+    //delete commModel.data.formData.products;
+
+    delete commModel.data.formData.products;
+    commModel.data.formData.giftwrap = "test";
+    console.log( commModel.data.formData );
+    var self = this;
+    var sql = 'INSERT INTO orders SET ? ';
+    //var sql = 'INSERT INTO orders (name, street, city, state, zip, country, giftwrap ) values (?, ?, ?, ?, ?, ?, ?) ';
+    db.query( sql, commModel.data.formData, function( err, result ){
+        if( err ){
+            console.log('[ordersExcute] error db.query');
+        } else {
+            console.log('[ordersExcute] db Transaction Success');
+        }
+
+        if( result ){
+            commModel.success = true;
+            commModel.code = 1;
+            commModel.message = result;
+            self.ordersCallback( null, commModel );
+        }
+    });
+};
+
+
+
+
 
 MainService.prototype.identifyProc = function( paramData, callback ){
     console.log('identifyProc : paramData : ' + JSON.stringify(paramData));
