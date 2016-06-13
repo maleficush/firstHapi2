@@ -48,6 +48,7 @@ angular.module( "sportsStoreAdmin" )
     .controller( "ordersCtrl", function ( $scope, $http, ordersUrl ){
         $http.get( ordersUrl, { withCredentials: false } )
             .success( function( data ){
+                console.log(data);
                 $scope.orders = data;
             })
             .error( function( error ){
@@ -56,7 +57,7 @@ angular.module( "sportsStoreAdmin" )
 
         $scope.selectedOrder;
 
-        $scope.sendOrder = function( order ){
+        $scope.selectOrder = function( order ){
             $scope.selectedOrder = order;
         };
 
@@ -65,8 +66,8 @@ angular.module( "sportsStoreAdmin" )
             console.log("※ calcTotal : " + order);
             console.log(JSON.stringify(order));
 
-            for ( var i = 0, len = order.data.length ; i < len ; i++) {
-                total += order.data[i].count * order.data[i].price;
+            for ( var i = 0, len = order.products.length ; i < len ; i++) {
+                total += order.products[i].count * order.products[i].price;
             }
             return total;
         };
