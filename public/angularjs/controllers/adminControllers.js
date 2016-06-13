@@ -1,20 +1,25 @@
 'use strict'
 
 angular.module( "sportsStoreAdmin" )
-    .constant( "authUrl", "http://localhost:8421/users/login")
-    .constant( "ordersUrl", "http://localhost:8421/orders" )
-    .controller( "authCtrl", function( $scope, $http, $location, authUrl ){
+    .constant( "authUrl", "http://localhost:5500/users/login")
+    .constant( "ordersUrl", "http://localhost:5500/orders" )
+    .controller( "authCtrl", function( $scope, $http, $location, authUrl, ordersUrl ){
 
         $scope.authenticate = function( user, pass ){
+            console.log(user + " / " + pass);
             $http.post( authUrl, {
                 username: user,
                 password: pass
             },{
                 withCredentials: true
+            })
 
-            }).success( function( data ){
+            .success( function( data ){
                 $location.path("/main");
-            }).error( function( error ){
+            })
+
+            .error( function( error ){
+                console.log(error);
                 $scope.authenticationError = error;
             });
 
