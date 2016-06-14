@@ -9,8 +9,9 @@
     <link href="/b3/css/bootstrap.css" rel="stylesheet" />
     <link href="/b3/css/bootstrap-theme.css" rel="stylesheet" />
     <script>
-        angular.module( 'sportsStoreAdmin', ["ngRoute"] )
+        angular.module( 'sportsStoreAdmin', ["ngRoute", "ngResource"] )
             .config( function( $routeProvider ){
+
                 $routeProvider.when( "/login",{
                     templateUrl: "/public/angularjs/views/adminLogin.html"
                 });

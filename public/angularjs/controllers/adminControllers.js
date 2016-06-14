@@ -50,6 +50,7 @@ angular.module( "sportsStoreAdmin" )
             .success( function( data ){
                 console.log(data);
                 $scope.orders = data;
+
             })
             .error( function( error ){
                 $scope.error = error;
