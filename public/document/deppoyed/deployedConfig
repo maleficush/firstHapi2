@@ -1,0 +1,3 @@
+dpd create <Collection name>
+
+dpd -p 5500 <Collection name>\app.dpd dashboard
